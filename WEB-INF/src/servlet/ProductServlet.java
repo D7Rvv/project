@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 public class ProductServlet extends HttpServlet{
 
     //商品ページのURL
-    String PRODUCT_PAGE_JSP = "/jsp/ProductPage/productDetail.jsp";
+    String PRODUCT_PAGE_JSP = "/jsp/ProductPage/ProductDetails.jsp";
     //デバッグ用のURL
     String DEBUG_PAGE_JSP = "/jsp/debug/product_detail.jsp";
 
@@ -47,10 +47,8 @@ public class ProductServlet extends HttpServlet{
             req.setAttribute("errorMsg", "※ProductServletでエラー発生<br>" + 
                                             "※データベース接続に失敗しました");
         } finally {
-            if(req.getParameter("debug") != null)
-                req.getRequestDispatcher(DEBUG_PAGE_JSP).forward(req, resp);
-            else
-                req.getRequestDispatcher(PRODUCT_PAGE_JSP).forward(req, resp);
+            // JSなどを書き換えず常に商品詳細画面(PRODUCT_PAGE_JSP)を表示させるよう修正
+            req.getRequestDispatcher(PRODUCT_PAGE_JSP).forward(req, resp);
         }
     }
 }
