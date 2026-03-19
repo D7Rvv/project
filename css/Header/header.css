@@ -1,0 +1,342 @@
+/*※※※※※※※※※※※※※※※※※※※※※※※※※※！！消さないで！！※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※*/
+/*※※※※※※※※※※※※※※※※※※※※※※※※※※！！ここから下は固定！！※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※*/
+/*※※※※※※※※※※※※※※※※※※※※※※※※※※！！消さないで！！※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※*/
+/* 全体の要素設定 */
+* {
+    margin: 0;
+    padding: 0;
+
+    /*基本設定フォント*/
+    font-family: 'Orbitron', 
+                 '游ゴシック'/*日本語用*/;
+}
+
+body{
+    min-height: 100vh;
+}
+
+.btn{
+    display: block;
+    width: 100%;
+    padding: 12px 0;
+    background: #085dbe;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn:hover{
+    background-color:#085dbe;
+    transform:  scale(0.95);
+    color:#ffffff;
+}
+
+  /*Topヘッダーの設定*/
+.site-header{
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    align-items: center;
+    background-color: #000000;
+    height: 100px;
+    margin: 0 auto;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+}
+
+/*Topヘッダーにロゴの設定*/
+.brand-logo {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ffffff;
+    text-decoration: none;
+    letter-spacing: 1px;
+
+    transition: all 0.3s ease;
+}
+
+.logo-knock{
+    color:#085dbe;
+}
+
+.brand-logo:hover{
+    transform:scale(0.95);
+}
+
+/*検索バー テンプレート　(形を流用)*/
+.search-form {
+    flex: 1;
+    max-width: 500px;
+    display: flex;
+    background: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.search-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: #000000;
+    padding: 10px 15px;
+    outline: none;
+
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/* 検索バーがクリックされた（focus）とき */
+.search-form input:focus::placeholder {
+  color: transparent; /* 透明にする */
+}
+
+.search-form button {
+    background: transparent;
+    border: none;
+    width: 50px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.search-form button:hover {
+    color: #085dbe;
+    transform: scale(1.3);
+}
+
+.search-form ::placeholder{
+    color: #000000;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+/*ナビゲーション*/
+nav ul {
+    display: flex;
+    gap: 30px;
+    list-style:none;
+}
+
+/*ナビゲーションボタンの設定*/
+.nav-btn{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	background-color: #000000;
+	color: white;
+	text-decoration: none;
+	border-radius: 15px;
+    transition: 0.2s ease;
+
+}
+
+.nav-btn:hover{
+    color: #085dbe;
+}
+
+.nav-btn:active{
+    transform: scale(0.9);
+}
+
+.nav-font{
+    font-size: 15px;
+}
+
+/*--------------サブメニュー部---------------------------------------------------------------------------------------*/
+
+/* メニューの基準位置を作る */
+.user-menu-container {
+    position: relative; 
+}
+
+/*--サブメニュー部*/
+.user-sub-menu {
+    position: absolute;
+    top: 120%;        /* アイコンの少し下に配置 */
+    right: -20px;     /* アイコンの右端と大体合わせる */
+    width: 220px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2); /* 浮き出し効果 */
+    border-radius: 8px;
+    
+    /* アニメーション用（透明にして上に少しずらしておく） */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 200;
+}
+
+/* 吹き出しの「三角」部分を作る（おまけの装飾） */
+.user-sub-menu::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    right: 35px;
+    border-bottom: 8px solid #ffffff;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+}
+
+/* サブメニュー内のリスト設定 */
+.user-sub-menu .sub-menu-list {
+    display: flex;
+    flex-direction: column; /* 縦並びに上書き */
+    gap: 0;
+    padding: 10px 0;
+}
+
+.user-sub-menu .sub-menu-list li a {
+    display: block;
+    padding: 12px 20px;
+    color: #333333;
+    text-decoration: none;
+    font-size: 15px;
+    transition: background-color 0.2s;
+}
+
+/* ホバー時の色変更 */
+.user-sub-menu .sub-menu-list li a:hover {
+    background-color: #f0f5fa; /* 薄い青 */
+    color: #085dbe;
+}
+
+/* アイコンと文字の間隔調整 */
+.user-sub-menu .sub-menu-list li a i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+/* --- チェックが入ったらメニューを表示 --- */
+#user-menu-check:checked ~ .user-sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* --- 前半の .user-menu-container などの記述はそのまま --- */
+
+/* サブメニュー内のリスト設定 */
+.user-sub-menu .sub-menu-list {
+    display: flex;
+    flex-direction: column; /* 縦並びに上書き */
+    gap: 0;
+    padding: 10px 0;
+    margin: 0;
+    list-style: none; /* リストの黒丸を消す（念のため） */
+}
+
+/* ★ aタグではなく buttonタグ 用に調整 */
+.user-sub-menu .sub-menu-list li button {
+    /* --- ボタン特有のスタイルをリセット --- */
+    background: none;
+    border: none;
+    font-family: inherit;
+    cursor: pointer;
+    width: 100%;        /* 横幅いっぱいに広げる */
+    text-align: left;   /* 文字を左寄せにする（ボタンはデフォルト中央のため） */
+    
+    /* --- 元のaタグと同じ装飾 --- */
+    display: block;
+    padding: 12px 20px;
+    color: #333333;
+    font-size: 15px;
+    transition: background-color 0.2s;
+}
+
+/* ホバー時の色変更 */
+.user-sub-menu .sub-menu-list li button:hover {
+    background-color: #f0f5fa; /* 薄い青 */
+    color: #085dbe;
+}
+
+/* アイコンと文字の間隔調整 */
+.user-sub-menu .sub-menu-list li button i {
+    width: 20px;
+    text-align: center;
+    margin-right: 8px;
+}
+
+/*カテゴリナビゲーションの設定*/
+.category-nav{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 20px;
+    border-bottom: 1px solid #cccccc;
+    background-color: #ffffff;
+
+    position: fixed;
+    width:100%;
+    top:100px;
+}
+
+.category-btn{
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #ffffff;
+
+    box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+    border-radius: 30px;
+    text-decoration: none;
+    color: black;
+
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+/* 「クリック中(:active)」でもなく、「選択中(.active)」でもない時だけ浮かす */
+.category-btn:hover:not(:active):not(.active) {
+    background-color: #085dbe;
+    color: white;
+    transform: translateY(-5px); 
+}
+
+.category-btn.active {
+    background-color: #085dbe;
+    color: white;
+    transform: translateY(0);
+}
+
+.category-btn:active {
+    background-color: #ffffff;
+    color: #085dbe;
+    transform: translateY(-5px); 
+    transform: scale(0.9);
+}
+/*※※※※※※※※※※※※※※※※※※※※※※※※※※！！消さないで！！※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※*/
+/*※※※※※※※※※※※※※※※※※※※※※※※※※※！！ここまで固定！！※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※*/
+/*※※※※※※※※※※※※※※※※※※※※※※※※※※！！消さないで！！※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※*/
+/*※※※※※※※※※※※※※※※※※※※※※※※※※※！！コピペ！！※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※※*/
+
+/* --- 背景オーバーレイ（暗い膜）の基本設定 --- */
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;   /* 画面の横幅いっぱい */
+    height: 100vh;  /* 画面の高さいっぱい */
+    background-color: rgba(0, 0, 0, 0.5); /* 黒色で50%の透明度 */
+    
+    /* 初期状態は非表示 */
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 100; /* ヘッダーより上で、吹き出しメニューより下の値 */
+}
+
+/* --- チェックが入った時にオーバーレイを表示する --- */
+#user-menu-check:checked ~ .menu-overlay {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* --- サブメニューが背景より手前に来るように調整 --- */
+.user-sub-menu {
+    /* もし既存のCSSに z-index がなければ 100より大きい値を設定 */
+    z-index: 200; 
+}

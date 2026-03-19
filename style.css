@@ -1,0 +1,726 @@
+/* =========================================
+   style.css
+   商品一覧ページ用スタイル
+   - 見やすい余白
+   - カード型レイアウト
+   - 絞り込みサイドバー
+   - レスポンシブ対応
+========================================= */
+
+/* 全体共通設定
+   すべての要素で box-sizing を border-box にし、
+   padding/border を含めたサイズ計算にする */
+* {
+    box-sizing: border-box;
+}
+
+/* ページ全体
+   背景を淡いグレーにし、文字色は濃いグレーで読みやすくする */
+body {
+    margin: 0;
+    font-family: "Yu Gothic UI", "Meiryo", sans-serif;
+    background: #f5f7fb;
+    color: #1f2937;
+    line-height: 1.6;
+}
+
+/* =========================================
+   ヘッダー
+========================================= */
+
+/* 上部ヘッダー全体
+   青系グラデーションで画面上部の主役にする */
+.site-header {
+    background: linear-gradient(135deg, #1d4ed8, #2563eb);
+    color: #ffffff;
+    padding: 20px 24px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ヘッダー内部のコンテンツ幅制御
+   横幅を制限し、中央寄せにする */
+.site-header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    gap: 16px;
+}
+
+/* サイトタイトル
+   一番目立つ文字サイズにする */
+.brand-title {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+}
+
+/* サブタイトル
+   タイトルより控えめに表示 */
+.brand-subtitle {
+    margin-top: 6px;
+    font-size: 14px;
+    opacity: 0.92;
+}
+
+/* 検索エリア
+   入力欄とボタンを横並びにする */
+.search-box {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* 検索入力欄
+   白背景・角丸・十分な余白で扱いやすくする */
+.search-input {
+    flex: 1;
+    min-width: 240px;
+    padding: 12px 14px;
+    border: none;
+    border-radius: 12px;
+    outline: none;
+    font-size: 14px;
+    background: #ffffff;
+    color: #111827;
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+/* 入力欄のフォーカス時
+   現在選択中であることを分かりやすくする */
+.search-input:focus {
+    box-shadow:
+        inset 0 0 0 2px rgba(37, 99, 235, 0.35),
+        0 0 0 4px rgba(255, 255, 255, 0.15);
+}
+
+/* 検索ボタン
+   濃色で押しやすい主ボタンにする */
+.search-button {
+    padding: 12px 18px;
+    border: none;
+    border-radius: 12px;
+    background: #111827;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: transform 0.15s ease, opacity 0.15s ease, box-shadow 0.15s ease;
+    box-shadow: 0 6px 16px rgba(17, 24, 39, 0.22);
+}
+
+/* ボタンホバー時
+   少し浮く表現で操作感を出す */
+.search-button:hover {
+    opacity: 0.95;
+    transform: translateY(-1px);
+}
+
+/* ボタン押下時
+   押し込まれた感じを出す */
+.search-button:active {
+    transform: translateY(0);
+}
+
+/* ヘッダー内の情報バッジ群
+   横並びで複数表示 */
+.header-info {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+/* 共通バッジ
+   小さな情報表示用 */
+.badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 10px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.16);
+    font-size: 12px;
+    font-weight: 500;
+    backdrop-filter: blur(3px);
+}
+
+/* 強調バッジ
+   現在カテゴリなど重要情報を少し目立たせる */
+.badge-primary {
+    background: rgba(255, 255, 255, 0.24);
+    font-weight: 700;
+}
+
+/* =========================================
+   メインレイアウト
+========================================= */
+
+/* ページ本体
+   最大幅を制限し中央寄せ */
+.page {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* ヒーローエリア
+   冒頭のカテゴリ表示やセレクトを入れる白いカード */
+.hero {
+    margin-bottom: 20px;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* ヒーロー上段
+   タイトルとカテゴリ選択を左右に並べる */
+.hero-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: end;
+    flex-wrap: wrap;
+}
+
+/* ヒーロー内見出し
+   ページ内で目立つ主見出し */
+.hero h1 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 0.01em;
+    color: #0f172a;
+}
+
+/* カテゴリ選択ボックス全体
+   ラベルと select を縦並びにする */
+.category-box {
+    min-width: 220px;
+    display: grid;
+    gap: 8px;
+}
+
+/* カテゴリラベル
+   説明用の小見出し */
+.category-box label {
+    font-size: 13px;
+    color: #475569;
+    font-weight: 700;
+}
+
+/* セレクトボックス
+   標準より少し上品にする */
+.category-box select {
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    background: #ffffff;
+    font-size: 14px;
+    color: #0f172a;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* セレクトフォーカス時 */
+.category-box select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.18);
+}
+
+/* サイドバー + 結果一覧の2カラム構成 */
+.layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+
+/* サイドバーとメインパネルの共通カード見た目 */
+.sidebar,
+.main-panel {
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* サイドバー
+   スクロール時も見えるように sticky にする */
+.sidebar {
+    overflow: hidden;
+    position: sticky;
+    top: 20px;
+}
+
+/* パネル上部ヘッダー
+   タイトル部分に下線を付けて区切る */
+.sidebar-header,
+.main-header {
+    padding: 20px 20px 12px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+/* サイドバー中身
+   高さを制限し、絞り込みだけスクロール可能にする */
+.sidebar-body {
+    padding: 16px 20px 20px;
+    max-height: calc(100vh - 180px);
+    overflow-y: auto;
+}
+
+/* セクション見出し */
+.section-title {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+/* セクション補足文 */
+.section-subtitle {
+    margin: 6px 0 0;
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.6;
+}
+
+/* 共通の補足説明文 */
+.filter-guide,
+.result-copy,
+.placeholder-note {
+    font-size: 13px;
+    line-height: 1.8;
+    color: #475569;
+}
+
+/* フィルタガイド
+   薄い青背景で案内として目立たせる */
+.filter-guide {
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+}
+
+/* 結果パネル
+   下側に余白を持たせて窮屈さをなくす */
+.main-panel {
+    padding-bottom: 20px;
+}
+
+/* 結果説明文 */
+.result-copy {
+    padding: 16px 20px 0;
+}
+
+/* プレースホルダ説明 */
+.placeholder-note {
+    padding: 18px 20px 0;
+}
+
+/* =========================================
+   フィルタ項目
+========================================= */
+
+/* 絞り込み条件の入れ物
+   各 option-area を縦に並べる */
+#filter-option-area {
+    display: grid;
+    gap: 16px;
+}
+
+/* 1つの絞り込みブロック
+   例: price, maker, cpu_gen など */
+.option-area {
+    display: grid;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #f8fafc;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 絞り込みブロックのホバー
+   軽く反応させて触れる場所だと分かるようにする */
+.option-area:hover {
+    border-color: #cbd5e1;
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.05);
+}
+
+/* カテゴリごとのオプション見出し */
+.category-option {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1e3a8a;
+    margin-bottom: 4px;
+    padding-bottom: 6px;
+    border-bottom: 1px dashed #cbd5e1;
+}
+
+/* チェックボックス自体
+   テキストとの余白を確保 */
+.option-checkbox {
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+/* option-area 内の label を見やすくする */
+.option-area label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+    color: #334155;
+    cursor: pointer;
+    line-height: 1.5;
+}
+
+/* option-area 内のテキスト入力や数値入力の共通デザイン */
+.option-area input[type="text"],
+.option-area input[type="number"],
+.option-area select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    background: #ffffff;
+    font-size: 14px;
+    color: #0f172a;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 絞り込み入力のフォーカス */
+.option-area input[type="text"]:focus,
+.option-area input[type="number"]:focus,
+.option-area select:focus {
+    border-color: #60a5fa;
+    box-shadow: 0 0 0 4px rgba(96, 165, 250, 0.16);
+}
+
+/* range スライダーなどが入る場合の余白補助 */
+.option-area .slider-area,
+.option-area .range-area {
+    padding-top: 6px;
+    padding-bottom: 4px;
+}
+
+/* =========================================
+   商品一覧カード
+========================================= */
+
+/* 商品カード一覧のグリッド
+   横幅に応じて自動で列数を変える */
+#product-display-area {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+}
+
+/* 商品カード本体
+   白カード + 軽い影 + hover 演出 */
+.product-card {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 14px;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
+    background: #ffffff;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    min-height: 100%;
+}
+
+/* 商品カード hover
+   少し浮かせて選びやすくする */
+.product-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.10);
+    border-color: #cbd5e1;
+}
+
+/* キーボード操作用フォーカス */
+.product-card:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* 商品画像枠
+   画像サイズがバラバラでもカード内で揃うようにする */
+.product-card-image-wrap {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e8f0;
+}
+
+/* 商品画像
+   枠いっぱいに表示しつつ比率を保つ */
+.product-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* メーカー名
+   補足情報なのでやや控えめ */
+.product-card-maker {
+    font-size: 12px;
+    color: #64748b;
+    font-weight: 600;
+}
+
+/* 商品名
+   カード内で最も重要な情報 */
+.product-card-name {
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+    min-height: 48px;
+    color: #111827;
+}
+
+/* 商品スペックの簡易説明 */
+.product-card-spec {
+    font-size: 13px;
+    color: #475569;
+    line-height: 1.6;
+    min-height: 42px;
+}
+
+/* 価格表示ブロック
+   価格と税表記を横並びにする */
+.product-card-price-block {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-top: auto;
+    padding-top: 4px;
+}
+
+/* 価格本体
+   赤系で目立たせる */
+.product-card-price {
+    font-size: 22px;
+    font-weight: 800;
+    color: #dc2626;
+    letter-spacing: 0.01em;
+}
+
+/* 税表記など小補足 */
+.product-card-tax {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* 詳細への誘導テキスト */
+.product-card-detail-hint {
+    font-size: 12px;
+    color: #2563eb;
+    font-weight: 700;
+}
+
+/* =========================================
+   ページャー
+========================================= */
+
+/* ページ送りエリア
+   ボタンを中央寄せ */
+#page-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    padding: 8px 20px 0;
+    flex-wrap: wrap;
+}
+
+/* 通常のページボタン
+   白背景で他要素と調和させる */
+.page-button,
+.active-page-button {
+    min-width: 90px;
+    padding: 10px 14px;
+    border-radius: 12px;
+    border: 1px solid #cbd5e1;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+/* 通常ボタン */
+.page-button {
+    background: #ffffff;
+    color: #0f172a;
+    cursor: pointer;
+    transition: background 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+/* 通常ボタン hover */
+.page-button:hover:not(:disabled) {
+    background: #f8fafc;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+}
+
+/* 無効化時 */
+.page-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 現在ページ表示
+   押せない情報用として淡青背景にする */
+.active-page-button {
+    background: #eff6ff;
+    border-color: #93c5fd;
+    color: #1d4ed8;
+    text-align: center;
+}
+
+/* =========================================
+   フッター
+========================================= */
+
+/* ページ最下部の補足 */
+.page-footer {
+    margin-top: 24px;
+    padding: 16px 20px;
+    text-align: center;
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* =========================================
+   非表示補助
+========================================= */
+
+/* スクリーンリーダー用の非表示要素
+   画面には見せないがDOM上には残す */
+.visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    border: 0 !important;
+    white-space: nowrap !important;
+}
+
+/* =========================================
+   noUiSlider 補助スタイル
+   HTML/TS側で使っている場合に自然になじませる
+========================================= */
+
+/* スライダー全体の余白 */
+.noUi-target {
+    border: none;
+    box-shadow: none;
+    background: #dbeafe;
+    height: 8px;
+    border-radius: 999px;
+}
+
+/* 選択範囲 */
+.noUi-connect {
+    background: linear-gradient(90deg, #2563eb, #60a5fa);
+}
+
+/* つまみ */
+.noUi-handle {
+    border: none;
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.22);
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* 横向きスライダーのハンドルサイズ */
+.noUi-horizontal .noUi-handle {
+    width: 20px;
+    height: 20px;
+    right: -10px;
+    top: -6px;
+}
+
+/* つまみ内部線を消してすっきりさせる */
+.noUi-handle::before,
+.noUi-handle::after {
+    display: none;
+}
+
+/* =========================================
+   レスポンシブ対応
+========================================= */
+
+/* タブレット以下
+   サイドバーとメインを縦並びにする */
+@media (max-width: 960px) {
+    .layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+    }
+
+    .sidebar-body {
+        max-height: none;
+    }
+}
+
+/* スマホ幅
+   余白や見出しを少し詰める */
+@media (max-width: 640px) {
+    .site-header {
+        padding: 16px;
+    }
+
+    .page {
+        padding: 16px;
+    }
+
+    .hero,
+    .sidebar,
+    .main-panel {
+        border-radius: 16px;
+    }
+
+    .brand-title {
+        font-size: 24px;
+    }
+
+    .hero h1 {
+        font-size: 24px;
+    }
+
+    .section-title {
+        font-size: 20px;
+    }
+
+    #product-display-area {
+        grid-template-columns: 1fr;
+        padding: 16px;
+    }
+
+    .search-button,
+    .page-button,
+    .active-page-button {
+        width: 100%;
+    }
+
+    #page-area {
+        align-items: stretch;
+    }
+}

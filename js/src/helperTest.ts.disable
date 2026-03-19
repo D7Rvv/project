@@ -1,0 +1,310 @@
+// NOTE: helper モジュールを動的 import することで、
+// ブラウザキャッシュにより古いモジュールが読み込まれる問題を回避します。
+//let helper: typeof import("./helper");
+
+function createSection(title: string): HTMLDivElement {
+  const section = document.createElement("div");
+  section.style.border = "1px solid #ccc";
+  section.style.borderRadius = "8px";
+  section.style.padding = "12px";
+  section.style.margin = "12px 0";
+
+  const h2 = document.createElement("h2");
+  h2.textContent = title;
+  h2.style.marginTop = "0";
+  section.appendChild(h2);
+
+  return section;
+}
+
+function createLogArea(): HTMLPreElement {
+  const pre = document.createElement("pre");
+  pre.id = "log";
+  pre.style.background = "#f5f5f5";
+  pre.style.border = "1px solid #ddd";
+  pre.style.padding = "12px";
+  pre.style.maxHeight = "280px";
+  pre.style.overflow = "auto";
+  pre.style.marginTop = "8px";
+  pre.textContent = "[log]\n";
+  return pre;
+}
+
+function log(message: string): void {
+  const pre = document.getElementById("log") as HTMLPreElement | null;
+  if (!pre) return;
+  pre.textContent += `> ${message}\n`;
+  pre.scrollTop = pre.scrollHeight;
+}
+
+function createButton(label: string, onClick: () => void): HTMLButtonElement {
+  const btn = document.createElement("button");
+  btn.textContent = label;
+  btn.style.marginRight = "8px";
+  btn.addEventListener("click", onClick);
+  return btn;
+}
+
+function createCodeBlock(content: string): HTMLPreElement {
+  const pre = document.createElement("pre");
+  pre.style.background = "#fafafa";
+  pre.style.border = "1px solid #eee";
+  pre.style.padding = "8px";
+  pre.style.whiteSpace = "pre-wrap";
+  pre.textContent = content;
+  return pre;
+}
+
+async function initTestPage(): Promise<void> {
+  try {
+    // モジュールを動的 import することで、ブラウザキャッシュで古い helper.js が使われるのを防ぎます。
+    helper = await import(`./helper.js?v=${Date.now()}`);
+
+    const {
+      appendChildToArea,
+      addButton,
+      addCheckbox,
+      addInputField,
+      addRangeInput,
+      addNoUiSlider,
+      addNoUiSliderSingle,
+      callApi,
+      getOptions,
+      parseStyle,
+      search,
+    } = helper;
+
+  const root = document.getElementById("test-root") ?? document.body;
+
+  if (!root) {
+    console.error("test-root が見つかりません");
+    return;
+  }
+
+  const title = document.createElement("h1");
+  title.textContent = "Helper 関数テストページ";
+  root.appendChild(title);
+
+  const description = document.createElement("p");
+  description.textContent = "このページでは helper.ts で定義されたヘルパー関数を順番に実行して動作を確認できます。";
+  root.appendChild(description);
+
+  const logArea = createLogArea();
+  root.appendChild(logArea);
+
+  // parseStyle
+  const parseSection = createSection("parseStyle");
+  const exampleStyle = { color: "#d14", "font-size": "14px", margin: "4px" };
+  parseSection.appendChild(createCodeBlock(`input: ${JSON.stringify(exampleStyle, null, 2)}`));
+  parseSection.appendChild(createCodeBlock(`output: ${parseStyle(exampleStyle)}`));
+  root.appendChild(parseSection);
+
+  // appendChildToArea
+  const appendSection = createSection("appendChildToArea");
+  appendSection.appendChild(document.createTextNode("タスクエリアに要素を追加します。"));
+  const appendArea = document.createElement("div");
+  appendArea.id = "append-area";
+  appendArea.style.padding = "8px";
+  appendArea.style.border = "1px dashed #999";
+  appendArea.style.margin = "8px 0";
+  appendArea.textContent = "ここに要素が追加されます。";
+  appendSection.appendChild(appendArea);
+  appendSection.appendChild(createButton("appendChildToArea を呼ぶ", () => {
+    try {
+      const newEl = document.createElement("div");
+      newEl.textContent = "appendChildToArea で追加されました (" + new Date().toLocaleTimeString() + ")";
+      newEl.style.padding = "4px";
+      newEl.style.background = "#eef";
+      appendChildToArea("append-area", newEl);
+      log("appendChildToArea: 成功");
+    } catch (e) {
+      log(`appendChildToArea: 失敗 - ${e}`);
+    }
+  }));
+  root.appendChild(appendSection);
+
+  // addButton
+  const buttonSection = createSection("addButton");
+  const buttonTarget = document.createElement("div");
+  buttonTarget.id = "button-area";
+  buttonTarget.style.padding = "8px";
+  buttonTarget.style.border = "1px dashed #999";
+  buttonTarget.style.margin = "8px 0";
+  buttonTarget.textContent = "ここにボタンが追加されます。";
+  buttonSection.appendChild(buttonTarget);
+
+  buttonSection.appendChild(createButton("ボタンを追加", () => {
+    addButton(
+      "test-btn",
+      "クリックしてログ",
+      "button-area",
+      { padding: "6px 12px", "margin-right": "8px" },
+      () => log("addButton: クリックされました")
+    );
+    log("addButton: ボタンを追加しました");
+  }));
+  root.appendChild(buttonSection);
+
+  // addCheckbox
+  const checkboxSection = createSection("addCheckbox");
+  const checkboxTarget = document.createElement("div");
+  checkboxTarget.id = "checkbox-area";
+  checkboxTarget.style.padding = "8px";
+  checkboxTarget.style.border = "1px dashed #999";
+  checkboxTarget.style.margin = "8px 0";
+  checkboxTarget.textContent = "ここにチェックボックスが追加されます。";
+  checkboxSection.appendChild(checkboxTarget);
+
+  checkboxSection.appendChild(createButton("チェックボックスを追加", () => {
+    addCheckbox(
+      "test-checkbox",
+      "チェックされるとログに出ます",
+      "checkbox-area",
+      { padding: "4px" },
+      (checked) => log(`addCheckbox: checked=${checked}`)
+    );
+    log("addCheckbox: チェックボックスを追加しました");
+  }));
+  root.appendChild(checkboxSection);
+
+  // addInputField
+  const inputSection = createSection("addInputField");
+  const inputTarget = document.createElement("div");
+  inputTarget.id = "input-area";
+  inputTarget.style.padding = "8px";
+  inputTarget.style.border = "1px dashed #999";
+  inputTarget.style.margin = "8px 0";
+  inputTarget.textContent = "ここに入力フィールドが追加されます。";
+  inputSection.appendChild(inputTarget);
+
+  inputSection.appendChild(createButton("入力フィールドを追加", () => {
+    addInputField(
+      "test-input",
+      "いくつか入力してみてください",
+      "input-area",
+      { padding: "4px", width: "320px" },
+      (value) => log(`addInputField: value=${value}`)
+    );
+    log("addInputField: 入力フィールドを追加しました");
+  }));
+  root.appendChild(inputSection);
+
+  // addRangeInput（単一ハンドルの noUiSlider に置き換え）
+  const rangeSection = createSection("addRangeInput（noUiSlider）");
+  const rangeTarget = document.createElement("div");
+  rangeTarget.id = "range-area";
+  rangeTarget.style.padding = "8px";
+  rangeTarget.style.border = "1px dashed #999";
+  rangeTarget.style.margin = "8px 0";
+  rangeTarget.textContent = "ここに単一ハンドルのスライダーが追加されます。";
+  rangeSection.appendChild(rangeTarget);
+
+  rangeSection.appendChild(createButton("スライダーを追加", () => {
+    addNoUiSliderSingle(
+      "test-range",
+      50,
+      0,
+      100,
+      "range-area",
+      { width: "320px" },
+      (value) => log(`addNoUiSliderSingle (rangeInput 置換): value=${value}`)
+    );
+    log("addNoUiSliderSingle: スライダーを追加しました");
+  }));
+  root.appendChild(rangeSection);
+
+  // addNoUiSlider
+  const noUiSliderSection = createSection("addNoUiSlider");
+  const noUiSliderTarget = document.createElement("div");
+  noUiSliderTarget.id = "noui-slider-area";
+  noUiSliderTarget.style.padding = "8px";
+  noUiSliderTarget.style.border = "1px dashed #999";
+  noUiSliderTarget.style.margin = "8px 0";
+  noUiSliderTarget.textContent = "ここに noUiSlider が追加されます。";
+  noUiSliderSection.appendChild(noUiSliderTarget);
+
+  noUiSliderSection.appendChild(createButton("noUiSlider を追加", () => {
+    addNoUiSlider(
+      "noui-slider",
+      0,
+      100,
+      "noui-slider-area",
+      { width: "340px", height: "20px", margin: "8px 0" },
+      (minValue: number, maxValue: number) => log(`addNoUiSlider: min=${minValue} max=${maxValue}`)
+    );
+    log("addNoUiSlider: スライダーを追加しました");
+  }));
+  root.appendChild(noUiSliderSection);
+
+  root.appendChild(createButton("ログをクリア", () => {
+    const pre = document.getElementById("log") as HTMLPreElement | null;
+    if (pre) pre.textContent = "[log]\n";
+  }));
+
+  createApiTestSection(root);
+  } catch (e) {
+    console.error(e);
+    const root = document.getElementById("test-root");
+    if (root) root.textContent = `テストページの初期化に失敗しました: ${e}`;
+  }
+}
+
+function createApiTestSection(root: HTMLElement): void {
+  const section = createSection("API 関連関数のテスト");
+
+  const urlInput = document.createElement("input");
+  urlInput.type = "text";
+  urlInput.value = "http://192.168.1.3:8080/np03_23th/Servlet/API/Option";
+  urlInput.style.width = "100%";
+  urlInput.style.marginBottom = "8px";
+  section.appendChild(document.createTextNode("API URL: "));
+  section.appendChild(urlInput);
+
+  const logResult = (label: string, value: any) => {
+    try {
+      log(`${label}: ${JSON.stringify(value, null, 2)}`);
+    } catch (e) {
+      log(`${label}: ${String(value)}`);
+    }
+  };
+
+  const pingButton = createButton("ping", async () => {
+    try {
+      const result = await helper.callApi({ url: urlInput.value, method: "POST", data: { action: "ping" } });
+      logResult("ping", result);
+    } catch (e) {
+      log(`ping: エラー - ${e}`);
+    }
+  });
+  section.appendChild(pingButton);
+
+  const getOptionsButton = createButton("getOptions", async () => {
+    try {
+      const result = await helper.getOptions("all");
+      logResult("getOptions", result);
+    } catch (e) {
+      log(`getOptions: エラー - ${e}`);
+    }
+  });
+  section.appendChild(getOptionsButton);
+
+  const searchButton = createButton("search", async () => {
+    try {
+      // まずオプションセットを取得してから検索（API 仕様に合わせる場合）
+      const options = await helper.getOptions("all");
+      const result = await helper.search("", "all", options);
+      logResult("search", result);
+    } catch (e) {
+      log(`search: エラー - ${e}`);
+    }
+  });
+  section.appendChild(searchButton);
+
+  root.appendChild(section);
+}
+
+if (document.readyState === "loading") {
+  window.addEventListener("DOMContentLoaded", () => void initTestPage());
+} else {
+  void initTestPage();
+}

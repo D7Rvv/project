@@ -1,0 +1,22 @@
+
+<web-app>
+	<!-- 書き方
+	<servlet>
+		<servlet-name>ProductServlet</servlet-name>
+		<servlet-class>ProductServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ProductServlet</servlet-name>
+		<url-pattern>/ProductServlet</url-pattern>
+	</servlet-mapping>　-->
+	
+	<servlet>
+		<servlet-name>CategoryPageServlet</servlet-name>
+		<servlet-class>servlet.CategoryPageServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CategoryPageServlet</servlet-name>
+		<url-pattern>/servlet/CategoryPageServlet</url-pattern>
+	</servlet-mapping>
+	
+</web-app>

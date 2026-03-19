@@ -1,0 +1,144 @@
+.main-container {
+    background-color: #ffffff;
+    max-width: 1400px;
+    margin: 30px auto;
+    display: flex;
+    gap: 30px;
+    align-items: flex-start;
+    margin-top: 60px;
+}
+
+
+.sidebar {
+    width: 320px;
+    min-width: 320px;
+    max-width: 320px;
+    flex-shrink: 0;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 5px 5px 10px #acacac;
+    align-items: center;
+    position: sticky;
+    top: 221px;
+}
+.sidebar-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #000000;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.sidebar-header a{
+    color: #fff;
+}
+
+.sidebar-header a:hover{
+    color: #ff0000;
+}
+
+.checkbox-group .btn{
+    display: block;
+    margin: 20px auto;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.checkbox-group .btn:hover{
+    background-color:#175091;
+}
+
+#filter-option-area{
+    padding: 10px 20px 20px;
+    overflow-y: auto;
+    max-height: 550px;
+    &::-webkit-scrollbar {
+    display: none;
+    }
+}
+
+.filter-section{
+    border-bottom: 1px solid #e7e7e7;
+    padding: 0 25px;
+}
+
+.filter-title{
+    font-size: 17px;
+    background: #ffffff;
+    color: rgb(0,0,0,0.6);
+    padding: 15px 0;
+}
+
+.checkbox-list{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    background-color: #ffffff;
+    padding: 0 0 20px;
+}
+
+.list-label{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-family: Meiryo;
+    font-size: 17px;
+}
+
+.checkbox-list input{
+    width: 16px;
+    height: 16px;
+    padding-bottom: 10px;
+    accent-color: #085dbe;
+}
+
+.noUi-target{
+    width: 100%;
+    margin: 15px 0;
+}
+
+.noUi-horizontal{
+    height: 6px;
+}
+
+.noUi-connect{
+    background: #085dbe;
+}
+
+.noUi-handle{
+    width: 18px;
+    height: 18px;
+    top: -6px;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid #085dbe;
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.noUi-handle:before,
+.noUi-handle:after{
+    display: none;
+}
+
+.product-area{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 20px;
+    flex: 1;
+}
+
+.product-card{
+    padding: 30px;
+    border: 1px solid #e4e4e4;
+    border-radius: 8px;
+    background: #fff;
+    transition: border-color 0.2s ease;
+}
+
+.product-card:hover{
+    border-color: #085dbe;
+}

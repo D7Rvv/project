@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>API テストページ</title>
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 24px; }
+    label { display: block; margin: 8px 0 4px; }
+    textarea { width: 100%; height: 100px; }
+    pre { background: #f6f6f6; padding: 12px; border: 1px solid #ddd; overflow: auto; }
+    button { margin-right: 8px; margin-top: 8px; }
+  </style>
+</head>
+<body>
+  <h1>API テストページ</h1>
+  <p>このページから <code>/Servlet/API/Option</code> API を呼び出してレスポンスを確認できます。</p>
+
+  <label>ベース URL (<code>http://192.168.1.3:8080/np03_23th</code>)</label>
+  <input id="baseUrl" type="text" value="" placeholder="http://192.168.1.3:8080/np03_23th" style="width:100%" />
+
+  <h2>Ping</h2>
+  <button id="btnPing">ping</button>
+
+  <h2>getOptions</h2>
+  <button id="btnGetOptions">getOptions</button>
+
+  <h2>search</h2>
+  <label><input id="useRawJson" type="checkbox" /> JSON を手入力する</label>
+
+  <div id="searchForm">
+    <label>searchText</label>
+    <input id="searchText" type="text" value="Ryzen 5" style="width:100%" />
+    <label>maxResults</label>
+    <input id="maxResults" type="number" value="10" style="width:100px" />
+    <label>options (JSON)</label>
+    <textarea id="optionsJson">{}</textarea>
+  </div>
+
+  <div id="rawJsonForm" style="display:ne;">
+    <label>リクエスト JSON</label>
+    <textarea id="requestJson">{
+  "action": "search",
+  "searchText": "Ryzen 5",
+  "maxResults": 10,
+  "options": {}
+}</textarea>
+  </div>
+
+  <button id="btnSearch">search</button>
+
+  <h2>結果</h2>
+  <pre id="result">(ここに API レスポンスが表示されます)</pre>
+
+  <script>
+    const resultEl = document.getElementById('result');
+
+    function getApiUrl() {
+      const baseInput = document.getElementById('baseUrl').value.trim();
+      if (baseInput) {
+        if (baseInput.endsWith('/Servlet/API/Option')) {
+          return baseInput;
+        }
+        return baseInput.replace(/\/+$/, '') + '/Servlet/API/Option';
+      }
+      const root = location.origin + location.pathname.replace(/\/[^/]*$/, '');
+      return root + '/Servlet/API/Option';
+    }
+
+    async function callApi(action, body) {
+      const url = getApiUrl() + '?action=' + encodeURIComponent(action);
+      const opts = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      };
+
+      if (body == null) {
+        body = { action };
+      }
+      opts.body = JSON.stringify(body);
+
+      try {
+        const res = await fetch(url, opts);
+        const text = await res.text();
+        let bodyText = text;
+        try {
+          const json = JSON.parse(text);
+          bodyText = JSON.stringify(json, null, 2);
+        } catch {
+          // JSON ではない場合はそのまま表示
+        }
+        resultEl.textContent = `HTTP ${res.status} ${res.statusText}\n\n` + bodyText;
+      } catch (e) {
+        resultEl.textContent = '通信エラー: ' + e;
+      }
+    }
+
+    const useRawJsonCheckbox = document.getElementById('useRawJson');
+    const searchForm = document.getElementById('searchForm');
+    const rawJsonForm = document.getElementById('rawJsonForm');
+
+    function toggleJsonMode() {
+      if (useRawJsonCheckbox.checked) {
+        searchForm.style.display = 'none';
+        rawJsonForm.style.display = 'block';
+      } else {
+        searchForm.style.display = 'block';
+        rawJsonForm.style.display = 'none';
+      }
+    }
+
+    useRawJsonCheckbox.addEventListener('change', toggleJsonMode);
+
+    document.getElementById('btnPing').addEventListener('click', () => callApi('ping', null));
+    document.getElementById('btnGetOptions').addEventListener('click', () => callApi('getOptions', null));
+    document.getElementById('btnSearch').addEventListener('click', () => {
+      let body;
+
+      if (useRawJsonCheckbox.checked) {
+        try {
+          body = JSON.parse(document.getElementById('requestJson').value || '{}');
+        } catch (e) {
+          resultEl.textContent = 'request JSON parse error: ' + e;
+          return;
+        }
+      } else {
+        let options;
+        try {
+          options = JSON.parse(document.getElementById('optionsJson').value || '{}');
+        } catch (e) {
+          resultEl.textContent = 'options JSON parse error: ' + e;
+          return;
+        }
+        body = {
+          action: 'search',
+          searchText: document.getElementById('searchText').value,
+          maxResults: Number(document.getElementById('maxResults').value) || 0,
+          options: options,
+        };
+      }
+
+      callApi('search', body);
+    });
+  </script>
+</body>
+</html>

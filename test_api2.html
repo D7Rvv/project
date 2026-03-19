@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品一覧</title>
+
+    <!-- noUiSlider -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.js"></script>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="site-header-inner">
+            <div class="brand">
+                <div class="brand-title">商品一覧</div>
+                <div class="brand-subtitle">カテゴリ別に絞り込みながら商品を比較できます</div>
+            </div>
+
+            <div class="search-box">
+                <input
+                    type="text"
+                    id="search-input"
+                    class="search-input"
+                    placeholder="商品名で検索..."
+                >
+                <button id="search-button" class="search-button" type="button">検索</button>
+            </div>
+
+            <div class="header-info">
+                <span class="badge badge-primary">表示カテゴリ: <span id="current-category-label">すべて</span></span>
+                <span class="badge">絞り込み対応</span>
+                <span class="badge">ページ切り替え対応</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="page">
+        <section class="hero">
+            <div class="hero-top">
+                <div>
+                    <h1><span id="hero-category-name">すべて</span> 商品一覧</h1>
+                </div>
+
+                <div class="category-box">
+                    <label for="category-select">表示カテゴリ</label>
+                    <select id="category-select" name="category">
+                        <option value="all" selected>すべて</option>
+                        <option value="cpu">CPU</option>
+                        <option value="gpu">GPU</option>
+                        <option value="memory">メモリ</option>
+                        <option value="mother_board">マザーボード</option>
+                        <option value="ssd">SSD</option>
+                        <option value="hdd">HDD</option>
+                    </select>
+                </div>
+            </div>
+        </section>
+
+        <div class="layout">
+            <aside class="sidebar" aria-label="絞り込み条件">
+                <div class="sidebar-header">
+                    <div>
+                        <h2 class="section-title">絞り込み</h2>
+                        <p class="section-subtitle">
+                            カテゴリを切り替えると、対応する条件が自動で切り替わります。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="sidebar-body">
+                    <div class="filter-guide">
+                        デフォルトは「すべて」です。<br>
+                        個別カテゴリを選ぶと、そのカテゴリ専用の絞り込み条件だけを表示します。
+                    </div>
+
+                    <div id="filter-option-area"></div>
+                </div>
+            </aside>
+
+            <section class="main-panel" aria-label="検索結果">
+                <div class="main-header">
+                    <div>
+                        <h2 class="section-title">検索結果</h2>
+                        <p class="section-subtitle">
+                            商品カードをクリックすると詳細ページへ移動します。
+                        </p>
+                    </div>
+                </div>
+
+                <div class="result-copy">
+                    デフォルトでは全カテゴリの商品を一覧表示します。カテゴリを絞ると、比較しやすい商品群だけを表示できます。
+                </div>
+
+                <div id="product-display-area"></div>
+
+                <div id="page-area">
+                    <span id="current-page"></span>
+                </div>
+
+                <div class="placeholder-note">
+                    商品一覧・ページャー・絞り込み条件は JavaScript により動的に描画されます。
+                </div>
+            </section>
+        </div>
+
+        <footer class="page-footer">
+            TypeScript をコンパイルした `index.js` を ES Modules として読み込む構成です。
+        </footer>
+
+        <!-- TypeScript側で参照される hidden 要素 -->
+        <div id="example" class="visually-hidden" aria-hidden="true"></div>
+        <div id="current-category" class="visually-hidden" aria-hidden="true">all</div>
+    </main>
+
+    <script type="module" src="./js/dist/index.js"></script>
+</body>
+</html>

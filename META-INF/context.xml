@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context reloadable="true">
+	<Resource
+		name="jdbc/resource"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@192.168.1.4:1521:ORCL"
+		username="np33_23th"
+		password="np0000"
+	/>
+</Context>
