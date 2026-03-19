@@ -8,15 +8,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PRODUCT PAGE</title>
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Header/header.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ProductPage/productPage.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.css">
+
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/Header/header.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/ProductPage/productPage.css">
     <script src="https://cdn.jsdelivr.net/npm/nouislider@15.8.1/dist/nouislider.min.js" defer></script>
 </head>
 
