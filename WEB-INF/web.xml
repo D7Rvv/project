@@ -16,7 +16,7 @@
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CategoryPageServlet</servlet-name>
-		<url-pattern>/servlet/CategoryPageServlet</url-pattern>
+		<url-pattern>/servlet/Category</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
