@@ -1,0 +1,1 @@
+Get-Content -Path "F:\Program Files\Apache Software Foundation\Tomcat 10.1\logs\catalina.2026-03-20.log" -wait -tail 0

@@ -1,0 +1,38 @@
+# Java related
+*.class
+*.jar
+*.war
+*.ear
+*.log
+logs/
+target/
+build/
+WEB-INF/lib/
+WEB-INF/classes/
+
+# IDE related
+.idea/
+.vscode/
+*.iml
+*.ipr
+*.iws
+
+# Node.js/npm/TypeScript related
+node_modules/
+dist/
+out/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS and other temporary files
+.DS_Store
+Thumbs.db
+*~
+#*#
+.#*
+.fuse_hidden*
+*.swp
+*.swo
+temp/
+tmp/
