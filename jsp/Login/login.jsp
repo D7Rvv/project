@@ -219,7 +219,7 @@
 
                         <div class="form-item">
                             <label for="login-userName">ユーザー名</label>
-                            <input type="text" id="login-userName" name="userName" required>
+                            <input type="text" id="login-userName" name="userName" required autofocus>
                         </div>
 
                         <div class="form-item">
