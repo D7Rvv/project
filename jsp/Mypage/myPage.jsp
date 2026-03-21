@@ -134,7 +134,7 @@
                     <div class="from-item">
                         <label for="signup-password">新パスワード</label>
                         <input type="password" id="signup-password" name="password" required autocomplete="off" placeholder="変更する場合のみ入力">
-                        <p class="note">※変更しない場合は空欄のままにしてくださ</p>
+                        <p class="note">※変更しない場合は空欄のままにしてください</p>
                     </div>
 
                    <div class="form-item">
