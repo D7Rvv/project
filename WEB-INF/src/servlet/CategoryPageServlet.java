@@ -1,13 +1,12 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.*;
-import java.util.*;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.RequestDispatcher;
 
+@WebServlet("/Servlet/Category")
 public class CategoryPageServlet extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) 
         throws ServletException, IOException {

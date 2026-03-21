@@ -23,27 +23,27 @@
 <jsp:include page="/jsp/Header/header.jsp"/>
 <nav class="category-nav">
     <h2>カテゴリ選択</h2>
-    <a href="${pageContext.request.contextPath}/servlet/Category?category=${category == 'CPU' ? 'all' : 'CPU'}"
+    <a href="${pageContext.request.contextPath}/Servlet/Category?category=${category == 'CPU' ? 'all' : 'CPU'}"
         class="category-btn ${category == 'CPU' ? 'active' : ''}">
         <i class="bi bi-cpu"></i> CPU
     </a>
-    <a href="${pageContext.request.contextPath}/servlet/Category?category=${category == 'GPU' ? 'all' : 'GPU'}"
+    <a href="${pageContext.request.contextPath}/Servlet/Category?category=${category == 'GPU' ? 'all' : 'GPU'}"
         class="category-btn ${category == 'GPU' ? 'active' : ''}">
         <i class="bi bi-gpu-card"></i> GPU
     </a>
-    <a href="${pageContext.request.contextPath}/servlet/Category?category=${category == 'MEMORY' ? 'all' : 'MEMORY'}"
+    <a href="${pageContext.request.contextPath}/Servlet/Category?category=${category == 'MEMORY' ? 'all' : 'MEMORY'}"
         class="category-btn ${category == 'MEMORY' ? 'active' : ''}">
         <i class="bi bi-memory"></i> MEMORY
     </a>
-    <a href="${pageContext.request.contextPath}/servlet/Category?category=${category == 'MOTHER_BOARD' ? 'all' : 'MOTHER_BOARD'}"
+    <a href="${pageContext.request.contextPath}/Servlet/Category?category=${category == 'MOTHER_BOARD' ? 'all' : 'MOTHER_BOARD'}"
         class="category-btn ${category == 'MOTHER_BOARD' ? 'active' : ''}">
         <i class="bi bi-motherboard"></i> MOTHERBOARD
     </a>
-    <a href="${pageContext.request.contextPath}/servlet/Category?category=${category == 'HDD' ? 'all' : 'HDD'}"
+    <a href="${pageContext.request.contextPath}/Servlet/Category?category=${category == 'HDD' ? 'all' : 'HDD'}"
         class="category-btn ${category == 'HDD' ? 'active' : ''}">
         <i class="bi bi-hdd"></i> HDD
     </a>
-    <a href="${pageContext.request.contextPath}/servlet/Category?category=${category == 'SSD' ? 'all' : 'SSD'}"
+    <a href="${pageContext.request.contextPath}/Servlet/Category?category=${category == 'SSD' ? 'all' : 'SSD'}"
         class="category-btn ${category == 'SSD' ? 'active' : ''}">
         <i class="bi bi-device-ssd"></i> SSD
     </a>

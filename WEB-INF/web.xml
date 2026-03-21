@@ -10,13 +10,13 @@
 		<url-pattern>/ProductServlet</url-pattern>
 	</servlet-mapping>　-->
 	
-	<servlet>
+	<!-- <servlet>
 		<servlet-name>CategoryPageServlet</servlet-name>
 		<servlet-class>servlet.CategoryPageServlet</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>CategoryPageServlet</servlet-name>
-		<url-pattern>/servlet/Category</url-pattern>
+		<url-pattern>/Servlet/Category</url-pattern>
 	</servlet-mapping>
-	
+	 -->
 </web-app>
