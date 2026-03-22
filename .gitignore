@@ -16,6 +16,7 @@ WEB-INF/classes/
 *.iml
 *.ipr
 *.iws
+*.bat
 
 # Node.js/npm/TypeScript related
 node_modules/
@@ -36,3 +37,4 @@ Thumbs.db
 *.swo
 temp/
 tmp/
+sql.bat
