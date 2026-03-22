@@ -39,37 +39,37 @@
 		
 		<!--　カテゴリグループ部　-->
 		<div class="category-group">
-			<a href="${pageContext.request.contextPath}/servlet/CategoryPageServlet?category=CPU" class="category-card">
+			<a href="${pageContext.request.contextPath}/Servlet/Category?category=CPU" class="category-card">
 				<div class="card-icon"><i class="bi bi-cpu"></i></div>
 				<h3>CPU</h3>
 				<p>Intel Core / AMD Ryzen</p>
 			</a>
 
-			<a href="${pageContext.request.contextPath}/servlet/CategoryPageServlet?category=GPU" class="category-card">
+			<a href="${pageContext.request.contextPath}/Servlet/Category?category=GPU" class="category-card">
 				<div class="card-icon"><i class="bi bi-gpu-card"></i></div>
 				<h3>GPU</h3>
 				<p>NVIDIA GeForce / Radeon</p>
 			</a>
 
-			<a href="${pageContext.request.contextPath}/servlet/CategoryPageServlet?category=MEMORY" class="category-card">
+			<a href="${pageContext.request.contextPath}/Servlet/Category?category=MEMORY" class="category-card">
 				<div class="card-icon"><i class="bi bi-memory"></i></div>
 				<h3>MEMORY</h3>
 				<p>DDR4 / DDR5</p>
 			</a>
 
-			<a href="${pageContext.request.contextPath}/servlet/CategoryPageServlet?category=MOTHER-BOARD" class="category-card">
+			<a href="${pageContext.request.contextPath}/Servlet/Category?category=MOTHER-BOARD" class="category-card">
 				<div class="card-icon"><i class="bi bi-motherboard"></i></div>
 				<h3>MOTHERBOARD</h3>
 				<p>ATX / Micro-ATX</p>
 			</a>
 
-			<a href="${pageContext.request.contextPath}/servlet/CategoryPageServlet?category=HDD" class="category-card">
+			<a href="${pageContext.request.contextPath}/Servlet/Category?category=HDD" class="category-card">
 				<div class="card-icon"><i class="bi bi-hdd"></i></div>
 				<h3>HDD</h3>
 				<p>3.5inch / NAS用</p>
 			</a>
 
-			<a href="${pageContext.request.contextPath}/servlet/CategoryPageServlet?category=SSD" class="category-card">
+			<a href="${pageContext.request.contextPath}/Servlet/Category?category=SSD" class="category-card">
 				<div class="card-icon"><i class="bi bi-device-ssd"></i></div>
 				<h3>SSD</h3>
 				<p>M.2 NVMe / SATA</p>
