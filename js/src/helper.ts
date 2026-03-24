@@ -16,7 +16,7 @@ import type {
 } from "./types.js";
 
 //定数
-const API_URL = "http://192.168.1.3:8080/np33_23th/Servlet/API/";
+const API_URL = "/project/Servlet/API/";
 const OPTIONS_API_URL = `${API_URL}Option`;
 
 type ValidationResult =
